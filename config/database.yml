@@ -1,0 +1,16 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: sodateyo_development
+  pool: 5
+  username: <%= ENV['DATABASE_DEV_USER'] %>
+  password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
+  host: <%= ENV['DATABASE_DEV_HOST'] %>
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: sodateyo_test
+  pool: 5
+  username: <%= ENV['DATABASE_DEV_USER'] %>
+  password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
+  host: <%= ENV['DATABASE_DEV_HOST'] %>
