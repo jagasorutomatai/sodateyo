@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # 保存成功
+      flash[:success] = 'アカウントの登録が完了しました'
+      redirect_to @user
     else
       puts 'newをレンダリング'
       puts @user.errors.any?
