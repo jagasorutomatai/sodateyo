@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :system do
     let(:user) { FactoryBot.build :user }
-    describe 'サインアップ画面' do
+    describe 'サインアップ処理' do
         context '有効な値を入力した時' do
             before do
                 visit signup_path

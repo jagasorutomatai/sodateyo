@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  describe 'GET /new' do
+  describe 'GET #new' do
     context '有効なリクエストのとき' do
       it 'HTTPのレスポンスが200 successとなる' do
         get signup_path
@@ -10,7 +10,7 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-  describe 'POST /create' do
+  describe 'POST #create' do
     context '有効なリクエストのとき' do
       it 'HTTPのレスポンスが200 successとなる' do
         expect do
