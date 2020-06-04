@@ -90,4 +90,12 @@ RSpec.describe User, type: :model do
       expect(duplicate_user).to_not be_valid
     end
   end
+
+  describe 'トークンの暗号化' do
+    context '空のトークンのとき' do
+      it '' do
+        expect(user.authenticated?('')).to be_falsey
+      end
+    end
+  end
 end

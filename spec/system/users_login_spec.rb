@@ -35,7 +35,9 @@ RSpec.describe User, type: :system do
                 visit login_path
                 fill_in 'session_email', with: 'testuser@sample.com'
                 fill_in 'session_password', with: 'password'
+                check 'ログイン情報を記憶する'
                 click_on 'ログインする'
+                click_on 'アカウント'
             end
 
             it 'ログインのリンクが表示されない' do
@@ -43,7 +45,12 @@ RSpec.describe User, type: :system do
             end
 
             it 'ログアウトのリンクが表示される' do
-                expect(page).to_not have_link 'ログアウト', href: '/logout'
+                expect(page).to have_link 'ログアウト', href: '/logout'
+            end
+
+            it 'Cookiesにログイン情報が保存される' do
+                cookies = page.driver.browser.manage.all_cookies
+                expect(cookies.count).to_not eq 1
             end
         end
     end
