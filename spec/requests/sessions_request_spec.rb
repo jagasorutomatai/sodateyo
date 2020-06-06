@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe 'Sessions', type: :request do
   let(:user) { FactoryBot.create :user }
-  before do user end
+  before { user }
   describe 'GET #new' do
     context '有効なリクエストのとき' do
       it 'HTTPのレスポンスが200 successとなる' do
@@ -11,11 +11,11 @@ RSpec.describe "Sessions", type: :request do
       end
     end
   end
-  
+
   describe 'POST #create' do
     context '有効なリクエストのとき' do
       it 'HTTPのレスポンスが200 successとなる' do
-        post login_path, params: { session: { email: user.email, passoword: user.password, remember_me: '1' } }
+        post login_path, params: { session: { email: user.email, password: user.password, remember_me: '1' } }
         expect(response).to have_http_status 200
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe "Sessions", type: :request do
   describe 'DELETE #destroy' do
     context 'ログインしている状態でDELETEリクエスがきたとき' do
       before do
-        post login_path, params: { session: { email: user.email, passoword: user.password } }
+        post login_path, params: { session: { email: user.email, password: user.password } }
         delete logout_path
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Sessions", type: :request do
     end
 
     context 'ログインしてない状態でDELETEリクエスがきたとき' do
-      before do delete logout_path end
+      before { delete logout_path }
       it 'ルートにリダイレクトされる' do
         expect(response).to redirect_to(root_url)
       end

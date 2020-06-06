@@ -21,7 +21,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <%= link_to "プロフィール", current_user, class: "dropdown-item" %>
-                            <%= link_to "設定", current_user, class: "dropdown-item" %>
+                            <%= link_to "設定", edit_user_path(current_user), class: "dropdown-item" %>
                             <div class="dropdown-divider"></div>
                             <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
                         </div>

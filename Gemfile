@@ -18,11 +18,13 @@ gem 'bootstrap', '4.5'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'rails-i18n'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do

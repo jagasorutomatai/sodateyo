@@ -19,8 +19,8 @@ require 'rspec/rails'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+# Dir[Rails.root.join('path/to')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -39,9 +39,7 @@ RSpec.configure do |config|
 
   # chromeをheadlessモードで起動
   config.before(:each) do |example|
-    if example.metadata[:type] == :system
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-    end
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400] if example.metadata[:type] == :system
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -73,5 +71,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # ヘルパーメソッドを追加
-  config.include HelperMethods
+  config.include SystemSupport, type: :system
+  config.include RequestSupport, type: :request
 end
