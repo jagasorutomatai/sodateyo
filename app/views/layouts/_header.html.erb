@@ -15,6 +15,11 @@
                     <li class="nav-item" style="font-size: 16px;">
                         <%= link_to 'ユーザー', users_path, class: "nav-link" %>
                     </li>
+                    <% if admin_user? %>
+                        <li class="nav-item" style="font-size: 16px;">
+                            <%= link_to '植物', plants_path, class: "nav-link" %>
+                        </li>
+                    <% end %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             アカウント
