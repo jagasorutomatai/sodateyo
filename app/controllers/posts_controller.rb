@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :logged_in_user
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @posts = Post.all
@@ -7,7 +8,6 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build if logged_in?
-    @plants = Plant.all
   end
 
   def create
@@ -22,6 +22,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = User.find(@post.user_id)
+    @prefecture = Prefecture.find(@post.prefecture_id)
   end
 
   def edit
@@ -40,6 +42,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :picture)
+    params.require(:post).permit(:title, :content, :picture, :prefecture_id)
   end
 end

@@ -4,5 +4,6 @@ FactoryBot.define do
     content { "testcontent" }
     picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/support/image.png')) }
     association :user
+    association :prefecture
   end
 end

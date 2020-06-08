@@ -1,4 +1,6 @@
 <h3><%= @post.title %></h3>
+<h2><%= @user.name %></h2>
+<p><%= @prefecture.name %></p>
 <div style="border: 1px solid black;">
     <%= @post.content %>
     <%= link_to '削除する', @post, method: :delete, data: { confirm: "削除しますか?" } %>
