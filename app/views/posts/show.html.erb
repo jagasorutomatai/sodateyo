@@ -1,0 +1,8 @@
+<h3><%= @post.title %></h3>
+<div style="border: 1px solid black;">
+    <%= @post.content %>
+    <%= link_to '削除する', @post, method: :delete, data: { confirm: "削除しますか?" } %>
+</div>
+<div style="border: 1px solid black;">
+    <%= image_tag @post.picture.url %>
+</div>
