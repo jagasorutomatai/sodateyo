@@ -1,10 +1,44 @@
-<h3><%= @post.title %></h3>
-<h2><%= @user.name %></h2>
-<p><%= @prefecture.name %></p>
-<div style="border: 1px solid black;">
-    <%= @post.content %>
-    <%= link_to '削除する', @post, method: :delete, data: { confirm: "削除しますか?" } %>
+<div class="row py-5">
+  <div class="col-sm-4">
+    <div class='d-flex justify-content-center'>
+      <div class="card" style="width: 20rem;">
+        <%= image_tag @post.picture.url %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @post.title %></h5>
+          <p class="card-subtitle mb-2 text-muted"><%= @post.content %>.</p>
+          <%= fa_icon 'heart' %> <span style="color:red">+15</span> 
+          <%= fa_icon 'comments' %> <span style="color:red">+30</span>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+              <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @user.name, @user %>
+          </li>
+          <li class="list-group-item">
+              <%= fa_icon 'map' %> 栽培地: <%= @prefecture.name %>
+          </li>
+          <li class="list-group-item">栽培場所: プランター</li>
+          <li class="list-group-item">栽培開始: 種</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="row">
+      <% @calendars.each do |calendar| %>
+        <div class="col-sm-11">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= "#{calendar.month}月" %></h5>
+              <span class="badge badge-pill badge-secondary">種植え</span>
+              <span class="badge badge-pill badge-success">収穫</span>
+              <p class="card-text"><%= calendar.content %></p>
+              <p><%= "気温: #{calendar.temperature} ℃" %></p>
+              <%= link_to "編集", edit_calendar_path(calendar) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div style="border: 1px solid black;">
-    <%= image_tag @post.picture.url %>
-</div>
+

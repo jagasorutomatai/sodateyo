@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_120246) do
+ActiveRecord::Schema.define(version: 2020_06_12_000252) do
+
+  create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.integer "temperature", limit: 1
+    t.date "planted_at"
+    t.date "harvested_at"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "picture"
+    t.integer "month", limit: 1
+    t.index ["post_id"], name: "index_calendars_on_post_id"
+  end
 
   create_table "plants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -52,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_120246) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "calendars", "posts"
   add_foreign_key "posts", "prefectures"
   add_foreign_key "posts", "users"
 end

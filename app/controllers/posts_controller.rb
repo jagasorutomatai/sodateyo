@@ -13,6 +13,10 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
+      # 1-12月のカレンダーのデータを作成
+      (1..12).each do |month|
+        @post.calendars.create(month: month)
+      end
       flash[:success] = '記事の登録に成功しました'
       redirect_to @post
     else
@@ -24,6 +28,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = User.find(@post.user_id)
     @prefecture = Prefecture.find(@post.prefecture_id)
+    @calendars = Calendar.where(post_id: @post.id)
   end
 
   def edit
