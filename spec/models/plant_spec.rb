@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe Plant, type: :model do
   let(:plant) { build :plant }
   describe '存在性を検証する' do

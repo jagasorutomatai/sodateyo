@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+  get 'posts/new'
+  get 'posts/show'
+  get 'posts/edit'
   get 'sessions/new'
   root 'static_pages#home'
   get  '/help', to: 'static_pages#help'
@@ -10,4 +14,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   resources :users
   resources :plants
+  resources :posts
+  resources :calendars
 end

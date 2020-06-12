@@ -1,0 +1,10 @@
+<% @posts.each do |post| %>
+    <div style="border: 1px solid black;">
+        <%= post.user.name %>
+        <%= post.title %>
+        <%= post.content %>
+        <%= image_tag post.picture.url %>
+        <%= link_to '詳細ページ', post %>
+    </div>
+<% end %>
+
