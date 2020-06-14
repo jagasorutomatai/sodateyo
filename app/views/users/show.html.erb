@@ -1,3 +1,7 @@
 <div>
     <%= @user.name %>
 </div>
+<div>
+    <%= render 'shared/stats' %>
+    <%= render 'follow_form' if logged_in? %>
+</div>

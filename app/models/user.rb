@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   has_many :posts, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 60 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -35,5 +39,21 @@ class User < ApplicationRecord
     return false if remember_digest.nil?
 
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  #フォーロー関連機能
+  def follow(other_user)
+    unless self==other_user
+      self.active_relationships.find_or_create_by(followed_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    relationship = self.active_relationships.find_by(followed_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.following.include?(other_user)
   end
 end
