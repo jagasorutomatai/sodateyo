@@ -1,22 +1,35 @@
 <div class="row py-5">
   <div class="col-sm-4">
     <div class='d-flex justify-content-center'>
-      <div class="card" style="width: 20rem;">
-        <%= image_tag @post.picture.url %>
-        <div class="card-body">
-          <h5 class="card-title"><%= @post.title %></h5>
-          <p class="card-subtitle mb-2 text-muted"><%= @post.content %>.</p>
-          <%= fa_icon 'heart' %> <span style="color:red">+15</span> 
-          <%= fa_icon 'comments' %> <span style="color:red">+30</span>
+      <div class="row ml-4">
+        <div class="col-sm-10">
+          <div class="card" style="width: 22rem;">
+            <%= image_tag @post.picture.url %>
+            <div class="card-body">
+              <h5 class="card-title"><%= @post.title %></h5>
+              <p class="card-subtitle mb-2 text-muted"><%= @post.content %>.</p>
+              <%= fa_icon 'heart' %> <span style="color:red">+15</span> 
+              <%= fa_icon 'comments' %> <span style="color:red">+30</span>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @user.name, @user %>
+              </li>
+              <li class="list-group-item">
+                  <%= fa_icon 'map' %> 栽培地: <%= @prefecture.name %>
+              </li>
+            </ul>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-              <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @user.name, @user %>
-          </li>
-          <li class="list-group-item">
-              <%= fa_icon 'map' %> 栽培地: <%= @prefecture.name %>
-          </li>
-        </ul>
+        <div class="col-sm-10 mt-5">
+          <div class="card" style="width: 22rem;">
+            <div class="card-body">
+              <h5 class="card-title">62件のコメント</h5>
+              <div class="dropdown-divider"></div>
+              <p class="card-subtitle mb-2 text-muted"><%= @post.content %></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
