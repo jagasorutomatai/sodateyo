@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_000252) do
+ActiveRecord::Schema.define(version: 2020_06_13_074517) do
 
   create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
     t.integer "temperature", limit: 1
-    t.date "planted_at"
-    t.date "harvested_at"
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
-    t.integer "month", limit: 1
+    t.date "month"
+    t.boolean "planted_flag", default: false
+    t.boolean "harvested_flag", default: false
     t.index ["post_id"], name: "index_calendars_on_post_id"
   end
 

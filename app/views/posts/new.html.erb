@@ -15,6 +15,14 @@
                 <div class="form-group">
                     <%= form.collection_select :prefecture_id, Prefecture.all, :id, :name, {},{ class: "form-control" } %>
                 </div>
+                <div class="form-group">
+                    <div class="input-group date" data-target-input="nearest">
+                        <%= form.text_field :planted_at, id: "planted_at", class: "form-control datepicker", data: { target: '#planted_at'} %>
+                        <div class="input-group-append" data-target="#planted_at" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
                 <%= form.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "form-control-file" %>
                 <%= form.submit "追加する", class: "btn btn-primary btn-block" %>
             <% end %>
@@ -28,5 +36,11 @@
     if (size_in_megabytes > 5) {
       alert('画像のサイズは5MBが上限です');
     }
+  });
+
+  $('#planted_at').datetimepicker({
+      format: 'L',
+      locale: 'ja',
+      dayViewHeaderFormat: 'YYYY年 MMM',
   });
 </script>

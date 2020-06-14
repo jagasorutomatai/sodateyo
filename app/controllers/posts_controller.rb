@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    @posts = Post.all
+    @search = Post.joins(:prefecture, :user, :calendars).includes(:prefecture, :user, :calendars).ransack(params[:q])
+    @posts = @search.result
   end
 
   def new
@@ -14,8 +15,14 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       # 1-12月のカレンダーのデータを作成
-      (1..12).each do |month|
-        @post.calendars.create(month: month)
+      planted_at = Date.parse(params[:post][:planted_at])
+      12.times do |count|
+        if count==0
+          @post.calendars.create(month: planted_at, planted_flag: true)
+        else
+          @post.calendars.create(month: planted_at)
+        end
+        planted_at = planted_at.next_month
       end
       flash[:success] = '記事の登録に成功しました'
       redirect_to @post
@@ -47,6 +54,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :picture, :prefecture_id)
+    params.require(:post).permit(:title, :content, :picture, :prefecture_id, :planted_at)
   end
 end

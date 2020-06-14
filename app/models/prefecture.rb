@@ -1,3 +1,3 @@
 class Prefecture < ApplicationRecord
-    has_many :prefecture
+    has_many :posts
 end
