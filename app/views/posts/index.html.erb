@@ -1,10 +1,31 @@
-<% @posts.each do |post| %>
-    <div style="border: 1px solid black;">
-        <%= post.user.name %>
-        <%= post.title %>
-        <%= post.content %>
-        <%= image_tag post.picture.url %>
-        <%= link_to '詳細ページ', post %>
+<div class="row py-5">
+  <div class="col-sm-12">
+    <div class='d-flex justify-content-center'>
+        <div class="card bg-light" style="width: 40rem;">
+            <div class="card-body">
+                <%= search_form_for @search, url: posts_index_path do |form| %>
+                    <%= form.collection_select :prefecture_name_cont, Prefecture.all, :name, :name, {include_blank: true},{ class: "form-control" } %>
+                    <%= form.search_field :title_or_content_or_user_name_cont, class: "form-control" %>
+                    <%= form.submit "検索", class: "btn btn-primary btn-block" %>
+                <% end %>
+            </div>
+        </div>
     </div>
-<% end %>
-
+  </div>
+  <% @posts.each do |post| %>
+    <div class="col-sm-10">
+        <div class='d-flex justify-content-center'>
+            <div class="card">
+                <div class="card-body">
+                <h5><%= link_to post.title, post %></h5>
+                <p class="card-subtitle mb-2 text-muted"><%= post.content %>.</p>
+                <span><%= post.user.name %></span>
+                <span><%= post.prefecture.name %></span>
+                <%= fa_icon 'heart' %><span style="color:red">いいね+15</span> 
+                <%= fa_icon 'comments' %> <span style="color:red">コメント+30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>

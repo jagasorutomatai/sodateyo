@@ -5,11 +5,15 @@ class CalendarsController < ApplicationController
 
     def update
         @calendar = Calendar.find(params[:id])
-        if @calendar.update(calendar_params)
-            @post = Post.find(@calendar.post_id)
-            redirect_to @post
-        else
-            render 'edit'
+        respond_to do |format|
+            if @calendar.update(calendar_params)
+                @post = Post.find(@calendar.post_id)
+                format.html { redirect_to @post }
+                format.js { @status = "success"}
+            else
+                format.html { render 'edit' }
+                format.js { @status = "fail"}
+            end
         end
     end
 

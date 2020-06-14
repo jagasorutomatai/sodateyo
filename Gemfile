@@ -21,6 +21,7 @@ gem 'rails-i18n'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'ransack'
 
 # moment.js
 gem 'momentjs-rails'
