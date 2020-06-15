@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     end
   end
   resources :plants
-  resources :posts
+  resources :posts do
+    resources :comments, only: [:create]
+  end
   resources :calendars
   resources :relationships, only: [:create, :destroy]
 end

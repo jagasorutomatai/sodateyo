@@ -1,6 +1,5 @@
 <div class="row py-5">
   <div class="col-sm-4">
-    <div class='d-flex justify-content-center'>
       <div class="row ml-4">
         <div class="col-sm-10">
           <div class="card" style="width: 22rem;">
@@ -8,12 +7,13 @@
             <div class="card-body">
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-subtitle mb-2 text-muted"><%= @post.content %>.</p>
-              <%= fa_icon 'heart' %> <span style="color:red">+15</span> 
-              <%= fa_icon 'comments' %> <span style="color:red">+30</span>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                   <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @user.name, @user %>
+              </li>
+              <li class="list-group-item">
+                  <%= fa_icon 'heart' %> いいね: 12
               </li>
               <li class="list-group-item">
                   <%= fa_icon 'map' %> 栽培地: <%= @prefecture.name %>
@@ -22,16 +22,28 @@
           </div>
         </div>
         <div class="col-sm-10 mt-5">
+          <h5 class="card-title"><%= "#{@comments.count}件のコメント" %></h5>
           <div class="card" style="width: 22rem;">
             <div class="card-body">
-              <h5 class="card-title">62件のコメント</h5>
-              <div class="dropdown-divider"></div>
-              <p class="card-subtitle mb-2 text-muted"><%= @post.content %></p>
+              <%= form_for([@post, @comment], remote: true) do |form| %>
+                <div id="comment-content">
+                  <%= form.text_area :content, class: "form-control", rows: 5 %>
+                </div>
+                <%= form.submit "追加する", class: "btn btn-link" %>
+              <% end %>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div id="comments" class="card-body pa-4">
+              <% @comments.each do |comment| %>
+                <div class="mt-2">
+                  <%= fa_icon 'user-circle' %><%= comment.user.name %><br />
+                  <%= comment.content %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
   <div class="col-sm-8">
     <div class="row">

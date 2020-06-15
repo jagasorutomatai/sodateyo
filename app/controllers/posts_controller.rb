@@ -36,6 +36,8 @@ class PostsController < ApplicationController
     @user = User.find(@post.user_id)
     @prefecture = Prefecture.find(@post.prefecture_id)
     @calendars = Calendar.where(post_id: @post.id)
+    @comment = @user.comments.build
+    @comments = @post.comments.all.order(created_at: "DESC")
   end
 
   def edit
