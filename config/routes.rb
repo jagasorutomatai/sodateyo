@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   end
   resources :calendars
   resources :relationships, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
 end
