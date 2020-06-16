@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :comments, dependent: :destroy
+  has_many :active_likes, class_name: "Like", foreign_key: "user_id", dependent: :destroy
+  has_many :liking, through: :active_likes, source: :post
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 60 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -58,5 +60,13 @@ class User < ApplicationRecord
     self.following.include?(other_user)
   end
 
-  #コメント関連機能
+  #いいね関連機能
+  def like(post)
+    self.active_likes.find_or_create_by(post_id: post.id)
+  end
+
+  def unlike(post)
+    like = self.active_relationships.find_by(post_id: post.id)
+    like.destroy if like
+  end
 end

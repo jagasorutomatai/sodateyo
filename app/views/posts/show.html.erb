@@ -7,13 +7,17 @@
             <div class="card-body">
               <h5 class="card-title"><%= @post.title %></h5>
               <p class="card-subtitle mb-2 text-muted"><%= @post.content %>.</p>
+              <%= form_for(current_user.active_likes.build, remote: true) do |form| %>
+                  <%= hidden_field_tag :post_id, @post.id %>
+                  <%= form.submit "いいね", class: "btn btn-primary" %>
+              <% end %> 
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                  <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @user.name, @user %>
+                  <%= fa_icon 'user-circle' %> 投稿者: <%= link_to @post.user.name, @post.user %>
               </li>
               <li class="list-group-item">
-                  <%= fa_icon 'heart' %> いいね: 12
+                  <%= fa_icon 'heart' , class: "text-danger"%> いいね: <span id="likes"><%= @likes.count %></span>
               </li>
               <li class="list-group-item">
                   <%= fa_icon 'map' %> 栽培地: <%= @prefecture.name %>
@@ -25,7 +29,7 @@
           <h5 class="card-title"><%= "#{@comments.count}件のコメント" %></h5>
           <div class="card" style="width: 22rem;">
             <div class="card-body">
-              <%= form_for([@post, @comment], remote: true) do |form| %>
+              <%= form_for([@post, current_user.comments.build], remote: true) do |form| %>
                 <div id="comment-content">
                   <%= form.text_area :content, class: "form-control", rows: 5 %>
                 </div>
