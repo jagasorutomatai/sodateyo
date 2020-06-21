@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
         @comment.post_id = @post.id
         respond_to do |format|
             if @comment.save
-                @comments = @post.comments.all.order(created_at: "DESC")
                 format.html { redirect_to @post }
                 format.js
             else

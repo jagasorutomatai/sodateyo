@@ -1,7 +1,0 @@
-<li><%= user.name %></li>
-<li><%= user.email %></li>
-<%= link_to '詳細ページ', user %>
-<% if current_user.admin? %>
-    <%= link_to '削除する', user, method: :delete, data: { confirm: "削除しますか?" } %>
-<% end %>
-<div class="dropdown-divider"></div>

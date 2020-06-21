@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     end
 
     def destroy
-        @post = Relationship.find(params[:id]).post
+        @post = Like.find(params[:id]).post
         current_user.unlike(@post)
         @likes = @post.liked
         respond_to do |format|

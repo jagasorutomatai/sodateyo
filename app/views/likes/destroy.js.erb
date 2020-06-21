@@ -1,1 +1,2 @@
-$("#likes").html('<%= @likes.count %>')
+$("#like_form").html("<%= escape_javascript(render('likes/like')) %>");
+$("#likes").html('<%= "#{@likes.count} いいね!" %>');

@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  attr_accessor :planted_at
   belongs_to :user
   belongs_to :prefecture
   has_many :calendars, dependent: :destroy
