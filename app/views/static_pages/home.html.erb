@@ -1,2 +1,7 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="row d-flex justify-content-center">
+    <div class="col-sm-10 mt-5">
+        <h5><%= Date.today.month %>月のおすすめの植物</h5>
+        <div class="dropdown-divider mb-4"></div>
+        <%= render 'posts/posts_list' %>
+    </div>
+</div>

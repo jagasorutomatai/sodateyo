@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_142317) do
+ActiveRecord::Schema.define(version: 2020_06_20_081220) do
 
   create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_06_15_142317) do
     t.datetime "updated_at", null: false
     t.string "picture"
     t.bigint "prefecture_id"
+    t.date "planted_at"
     t.index ["prefecture_id"], name: "index_posts_on_prefecture_id"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"

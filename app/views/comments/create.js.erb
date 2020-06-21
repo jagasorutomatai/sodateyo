@@ -1,2 +1,3 @@
 $("#comment-content > textarea").val('');
-$("#comments").html('<% @comments.each do |comment| %><div class="mt-2"><%= fa_icon "user-circle" %><%= comment.user.name %><br /><%= comment.content %></div><% end %>');
+$("#comments").html('<% @post.comments.order(created_at: "DESC").each do |comment| %><div class="mt-2"><%= fa_icon "user-circle" %><%= comment.user.name %><br /><%= comment.content %></div><% end %>');
+$(".comments_count").html('<%= "#{@post.comments.count}件のコメント" %>')

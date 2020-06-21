@@ -66,7 +66,11 @@ class User < ApplicationRecord
   end
 
   def unlike(post)
-    like = self.active_relationships.find_by(post_id: post.id)
+    like = self.active_likes.find_by(post_id: post.id)
     like.destroy if like
+  end
+
+  def liking?(post)
+    self.liking.include?(post)
   end
 end

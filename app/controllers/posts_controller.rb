@@ -3,8 +3,8 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    @search = Post.joins(:prefecture, :user, :calendars).includes(:prefecture, :user, :calendars).ransack(params[:q])
-    @posts = @search.result
+    @search = Post.ransack(params[:q])
+    @posts = @search.result.page(params[:page]).per(3)
   end
 
   def new
@@ -35,7 +35,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @prefecture = Prefecture.find(@post.prefecture_id)
     @calendars = Calendar.where(post_id: @post.id)
-    @comments = @post.comments.all.order(created_at: "DESC")
     @likes = @post.liked
   end
 
