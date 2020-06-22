@@ -17,7 +17,7 @@
         <h5>あなたの植物たち</h5>
         <div class="dropdown-divider mb-3"></div>
         <%= link_to "記事を投稿する", new_post_path, class: 'btn btn-primary btn-lg btn-block mb-3' %>
-        <%= render 'posts/posts_list' %>
+        <%= render 'posts/posts_list', posts: @posts %>
         <div class=" d-flex justify-content-center">
             <%= paginate @posts %>
         </div>
