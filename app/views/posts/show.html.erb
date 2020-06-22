@@ -36,48 +36,12 @@
   <div class="col-sm-10 mt-4">
     <h5>カレンダー</h5>
     <div class="dropdown-divider mb-4"></div>
-      <% @calendars.each do |calendar| %>
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title">
-              <h5><%= changeDateFormat(calendar.month) %></h5>
-              <%= link_to "編集", edit_calendar_path(calendar), remote: true %>
-              <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-            </div>
-            <% if calendar.planted_flag %>
-              <span class="badge badge-pill badge-success">種植え</span>
-            <% end %>
-            <% if calendar.harvested_flag %>
-              <span class="badge badge-pill badge-success">収穫</span>
-            <% end %>
-            <% if calendar.picture.url %>
-              <span class="badge badge-pill badge-info">写真あり</span>
-            <% end %>
-            <% if calendar.temperature %>
-              <span class="badge badge-pill badge-info"><%= "気温:#{calendar.temperature}℃" %></span>
-            <% end %>
-            <div class="dropdown-divider"></div>
-            <p class="card-text"><%= calendar.content %></p>
-          </div>                
-        </div>
-    <% end %>
+    <%= render 'calendars/calendars_list' %>
   </div>
   <div class="col-sm-10 mt-5">
     <h5 class="comments_count"><%= "#{@post.comments.count}件のコメント" %></h5>
-    <%= form_for([@post, current_user.comments.build], remote: true) do |form| %>
-      <div id="comment-content">
-        <%= form.text_area :content, class: "form-control", rows: 5 %>
-      </div>
-      <%= form.submit "追加する", class: "btn btn-link" %>
-    <% end %>
+    <%= render 'comments/comment_form' %>
     <div class="dropdown-divider mb-4"></div>
-    <div id="comments" class="card-body">
-      <% @post.comments.order(created_at: "DESC").each do |comment| %>
-        <div class="mt-2">
-          <%= fa_icon 'user-circle', class: 'mr-2' %><%= comment.user.name %><br />
-          <div class="p-2"><%= comment.content %></div>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'comments/comments_list'%>
   </div>
 </div>
