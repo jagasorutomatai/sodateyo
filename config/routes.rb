@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   resources :calendars
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
+  resources :ranks, only: [:index]
 end

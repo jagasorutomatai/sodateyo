@@ -12,4 +12,6 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :prefecture_id, presence: { message: 'を選択してください。' }
   validates :planted_at, presence: { message: 'を選択してください。' }
+
+  #いいねが多い
 end
