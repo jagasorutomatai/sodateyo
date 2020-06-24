@@ -24,7 +24,7 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
-  # ランダムなトークンを返す
+  # 認証関連機能
   def self.new_token
     SecureRandom.urlsafe_base64
   end
