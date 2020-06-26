@@ -1,6 +1,7 @@
+
 class PostsController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_post_user, only: [:edit, :update]
 
   def index
     @search = Post.ransack(params[:q])
@@ -43,6 +44,13 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:success] = '記事の情報を変更しました'
+      redirect_to @post
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -55,5 +63,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :picture, :prefecture_id, :planted_at)
+  end
+
+  def correct_post_user
+    @user = Post.find(params[:id]).user
+    redirect_to(root_url) unless @user == current_user
   end
 end
