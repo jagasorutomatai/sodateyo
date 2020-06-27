@@ -4,8 +4,6 @@
 ・ユーザー認証が成功したか
 ・ビューに表示されたメッセージは適切か
 """
-
-
 require 'rails_helper'
 
 RSpec.describe 'Sessions', type: :request do
