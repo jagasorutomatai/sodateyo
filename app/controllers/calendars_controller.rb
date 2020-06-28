@@ -1,4 +1,7 @@
 class CalendarsController < ApplicationController
+    before_action :logged_in_user
+    before_action :correct_calendar_user
+
     def edit
         @calendar = Calendar.find_by(id: params[:id])
     end
@@ -18,8 +21,12 @@ class CalendarsController < ApplicationController
     end
 
     private
-
     def calendar_params
-        params.require(:calendar).permit(:month, :content, :temperature, :planted_at, :harvested_at, :picture)
+        params.require(:calendar).permit(:content, :temperature, :harvested_flag, :picture)
+    end
+
+    def correct_calendar_user
+        @user = Calendar.find(params[:id]).post.user
+        redirect_to(root_url) unless @user == current_user
     end
 end

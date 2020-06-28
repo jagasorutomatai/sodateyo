@@ -1,5 +1,7 @@
 class Calendar < ApplicationRecord
   belongs_to :post
+  validates :month, presence: true
+  validates :content, length: { maximum: 140 }
   mount_uploader :picture, PictureUploader
   validate :picture_size
 

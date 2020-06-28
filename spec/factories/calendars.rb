@@ -1,10 +1,11 @@
 FactoryBot.define do
-  factory :calendar do
-    month { "2020-06-11" }
-    content { "MyText" }
-    temperature { "" }
-    planted_at { "2020-06-11" }
-    harvested_at { "2020-06-11" }
-    post { nil }
+  factory :january, class: Calendar do
+    month { "2020-01-01" }
+    content { "カレンダーの内容" }
+    temperature { 24 }
+    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image.png')) }
+    planted_flag { true }
+    harvested_flag { false }
+    association :post, factory: :post1
   end
 end

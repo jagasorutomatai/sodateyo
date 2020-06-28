@@ -12,10 +12,10 @@ RSpec.describe "Relationships", type: :request do
             end
             context '有効なリクエストのとき' do
                 before do
-                  post relationships_path, params: { followed_id: other.id }
+                  post relationships_path, params: { followed_id: other.id }, xhr: true
                 end
-                it 'HTTPレスポンスステータスコードが 302 ok となる' do
-                  expect(response).to have_http_status 302
+                it 'HTTPレスポンスステータスコードが 200 ok となる' do
+                  expect(response).to have_http_status 200
                 end
                 it 'DBに登録されている記事数が1つ増えてる' do
                     expect(Relationship.count).to eq (count + 1)
@@ -25,7 +25,7 @@ RSpec.describe "Relationships", type: :request do
 
         context 'ログインしていないとき' do
             before do
-                post relationships_path, params: { followed_id: other.id }
+                post relationships_path, params: { followed_id: other.id }, xhr: true
             end
             it 'ログイン画面にリダイレクトされる' do
                 expect(response).to redirect_to(login_url)
