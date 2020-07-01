@@ -69,12 +69,6 @@ RSpec.describe User, type: :system do
         it 'フラッシュメッセージが表示される' do
             expect(page).to have_selector('.alert-danger', text: 'メールアドレス/パスワードが間違っています')
         end
-
-        # _sodateyo_session, user_id, remember_token
-        it 'Cookiesにログイン情報が保存される' do
-            cookies = page.driver.browser.manage.all_cookies
-            expect(cookies.count).to eq 1
-        end
     end
 
     context 'ログイン失敗後に他のページに遷移したとき' do
