@@ -8,6 +8,7 @@
             <%= link_to @post.title, @post %>
             <%= @post.user.name %>
             <%= @post.prefecture.name %>
+            <%= link_to  '編集' ,edit_post_path(@post) %>
         </div>
         <div class="card-body">
           <div class="row">

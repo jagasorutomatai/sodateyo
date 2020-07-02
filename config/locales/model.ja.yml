@@ -18,10 +18,11 @@ ja:
           picture: 植物の画像
         post:
           id: ID
-          title: タイトル
+          title: 記事のタイトル
           content: 記事の内容
           picture: 植物の画像
-          planted_at: 植えた日
+          prefecture_id: 都道府県
+          planted_at: 栽培開始日
   attributes:
     created_at: 作成日
     updated_at: 更新日

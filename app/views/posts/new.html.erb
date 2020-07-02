@@ -17,12 +17,12 @@
             </div>
             <div class="form-group">
                 <span class="badge badge-danger">必須</span>
-                <label for="prefecture_id">都道府県</label>
-                <%= form.collection_select :prefecture_id, Prefecture.all, :id, :name, {},{ class: "form-control" } %>
+                <%= form.label :prefecture_id %>
+                <%= form.collection_select :prefecture_id, Prefecture.all, :id, :name, { },{ class: "form-control" } %>
             </div>
             <div class="form-group">
                 <span class="badge badge-danger">必須</span>
-                <label for="prefecture_id">栽培開始日</label>
+                <%= form.label :planted_at %>
                 <div class="input-group date" data-target-input="nearest">
                     <%= form.text_field :planted_at, id: "planted_at", class: "form-control datepicker", data: { target: '#planted_at'} %>
                     <div class="input-group-append" data-target="#planted_at" data-toggle="datetimepicker">
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <span class="badge badge-danger">必須</span>
-                <label for="prefecture_id">植物の写真</label>
+                <%= form.label :picture %>
                 <%= form.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "form-control-file" %>
             </div>
             <%= form.submit "追加する", class: "btn btn-primary btn-block" %>
