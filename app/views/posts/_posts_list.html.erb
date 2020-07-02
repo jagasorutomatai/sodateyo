@@ -1,11 +1,11 @@
 <% posts.each do |post| %>
     <div class='d-flex justify-content-center'>
-        <div class="card mb-4">
+        <div class="card mb-4 post_card">
             <div class="card-header">
                 <span class="badge badge-success mr-2"><%= "#{changeDateFormat(post.planted_at)}栽培開始" %></span>
                 <%= link_to post.title, post %>
                 <%= post.user.name %>
-                <%= post.prefecture.name %>
+                栽培地:<%= post.prefecture.name %>
             </div>
             <div class="card-body">
                 <div class="row">

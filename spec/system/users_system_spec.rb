@@ -41,16 +41,16 @@ RSpec.describe User, type: :system do
       it 'ユーザー作成画面が表示される' do
         expect(current_path).to eq signup_path
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: '名前を入力してください')
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: 'メールアドレスを入力してください')
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: 'メールアドレスは不正な値です')
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: 'パスワードを入力してください')
       end
     end
@@ -91,13 +91,13 @@ RSpec.describe User, type: :system do
         fill_in 'user_email', with: ''
         click_on '変更を保存する'
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: '名前を入力してください')
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: 'メールアドレスを入力してください')
       end
-      it 'フラッシュメッセージが表示される' do
+      it 'エラーメッセージが表示される' do
         expect(page).to have_selector('.alert-danger', text: 'メールアドレスは不正な値です')
       end
     end

@@ -7,9 +7,9 @@ class Post < ApplicationRecord
   has_many :liked, through: :passive_likes, source: :user
   validates :title, presence: true, length: { maximum: 60 }
   validates :content, presence: true, length: { maximum: 140 }
-  validates :picture, presence: { message: 'を選択してください。' }
+  validates :picture, presence: { message: 'を選択してください' }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
-  validates :prefecture_id, presence: { message: 'を選択してください。' }
-  validates :planted_at, presence: { message: 'を選択してください。' }
+  validates :prefecture_id, presence: { message: 'を選択してください' }
+  validates :planted_at, presence: { message: 'を選択してください' }
 end

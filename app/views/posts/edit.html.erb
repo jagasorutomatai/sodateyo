@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-center">
   <div class="col-lg-7 col-md-9 col-sm-11 mt-4">
-    <h5>記事作成</h5>
+    <h5>記事変更</h5>
     <div class="dropdown-divider mb-4"></div>
     <div class="bg-light p-4">
         <%= form_for(@post) do |form| %>
@@ -25,7 +25,7 @@
                 <label for="prefecture_id">植物の写真</label>
                 <%= form.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "form-control-file" %>
             </div>
-            <%= form.submit "追加する", class: "btn btn-primary btn-block" %>
+            <%= form.submit "変更する", class: "btn btn-primary btn-block" %>
         <% end %>
     </div>
   </div>
