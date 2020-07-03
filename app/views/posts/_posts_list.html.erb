@@ -4,7 +4,7 @@
             <div class="card-header">
                 <span class="badge badge-success mr-2"><%= "#{changeDateFormat(post.planted_at)}栽培開始" %></span>
                 <%= link_to post.title, post %>
-                <%= post.user.name %>
+                <%= link_to post.user.name, post.user%>
                 栽培地:<%= post.prefecture.name %>
             </div>
             <div class="card-body">
