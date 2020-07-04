@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Like, type: :system do
+RSpec.describe Comment, type: :system do
   let!(:user) { create :user }
   let!(:other) { create :other}
   let!(:kanagawa) { create :prefecture, name: '神奈川県'}
