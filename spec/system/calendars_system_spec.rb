@@ -47,12 +47,9 @@ RSpec.describe Calendar, type: :system do
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
             first('.calendar_card').click_on '登録'
-            fill_in 'calendar_content', with: 'テスト用カレンダーの内容'
+            fill_in 'calendar_content', with: 'テスト'
             select '26', from: 'calendar_temperature'
             click_on '登録する'
-        end
-        it 'カレンダーの内容が反映されている' do
-            expect(page).to have_content 'テスト用カレンダーの内容'
         end
         it '気温が反映されている' do
             expect(page).to have_selector '.badge', text: '気温:26℃'
