@@ -11,11 +11,12 @@ class CalendarsController < ApplicationController
         respond_to do |format|
             if @calendar.update(calendar_params)
                 @post = Post.find(@calendar.post_id)
+                @calendars = @post.calendars
                 format.html { redirect_to @post }
                 format.js { @status = "success"}
             else
-                format.html { render 'edit' }
-                format.js { @status = "fail"}
+                format.html
+                format.js { @status = "fail" }
             end
         end
     end
