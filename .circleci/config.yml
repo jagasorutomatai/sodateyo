@@ -12,6 +12,7 @@ references:
       TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       MYSQL_USER: "root"
       MYSQL_PASSWORD: ""
+      MYSQL_HOST: "127.0.0.1"
 
   restore_code_cache: &restore_code_cache
     restore_cache:
