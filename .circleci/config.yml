@@ -14,15 +14,15 @@ references:
       MYSQL_PASSWORD: ""
 
   restore_code_cache: &restore_code_cache
-    - restore_cache:
-    keys:
-      - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    restore_cache:
+      keys:
+        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
   restore_gem_cache: &restore_gem_cache
-    - restore_cache:
-    keys:
-      - v1-bundle-{{ checksum "Gemfile.lock" }}
-      - v1-bundle
+    restore_cache:
+      keys:
+        - v1-bundle-{{ checksum "Gemfile.lock" }}
+        - v1-bundle
 
   
 # 実際に実行するジョブを定義する
