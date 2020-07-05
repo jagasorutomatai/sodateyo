@@ -46,6 +46,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem "rspec_junit_formatter"
   # gem 'chromedriver-helper'
 end
 
