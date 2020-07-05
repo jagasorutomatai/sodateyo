@@ -1,0 +1,104 @@
+version: 2.1
+
+# 共通処理
+references:
+  defaults: &defaults
+    working_directory: ~/sodateyo
+
+  ruby_docker_image: &ruby_docker_image
+    image: circleci/ruby:2.7.1-node-browsers
+    enviroment:
+      RAILS_ENV: test
+      TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: ""
+
+  restore_code_cache: &restore_code_cache
+    - restore_cache:
+    keys:
+      - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+  restore_gem_cache: &restore_gem_cache
+    - restore_cache:
+    keys:
+      - v1-bundle-{{ checksum "Gemfile.lock" }}
+      - v1-bundle
+
+  
+# 実際に実行するジョブを定義する
+jobs:
+  # コードをチェックアウトして、キャッシュに保存
+  checkout_code:
+    <<: *defaults
+    docker:
+      - *ruby_docker_image
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/sodateyo
+ 
+  # ライブラリのインストール
+  bundle_dependencies:
+    <<: *defaults
+    docker:
+      - *ruby_docker_image
+      steps:
+        - *restore_code_cache
+        - *restore_gem_cache
+        - run: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --jobs 4 --retry 3
+        - save_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock"}}
+          paths:
+            - ./vendor/bundle
+
+  # Rspec(テスト)を実行する
+  test:
+    <<: *defaults
+    docker:
+      - *ruby_docker_image
+      - image: circleci/mysql:5.7.30
+        enviroment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      steps:
+        - *restore_code_cache
+        - *restore_gem_cache
+        - run: bundle --path vendor/bundle
+
+        # データーベースの作成
+        - run: bundle exec rails db:create
+        - run: bundle exec rails db:schema:load
+
+        # Rspec(テスト)の実行
+        - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES
+
+        # テストメタデータの収集
+        - store_test_results:
+          path: /tmp/test-results
+        - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+# ワークフロー(ジョブ実行する順番＆条件を定義する)
+workflows:
+  version: 2
+  build:
+    jobs:
+      - checkout_code
+      - bundle_dependencies:
+          requires:
+            - checkout_code
+      - test:
+          requires:
+            - bundle_dependencies
