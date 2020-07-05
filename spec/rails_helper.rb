@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -19,8 +19,8 @@ require 'rspec/rails'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+# Dir[Rails.root.join('path/to')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -30,9 +30,33 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--no-sandbox')
+  options.add_argument('--headless')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1680,1050')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
 RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    # Headless chromeをデフォルトのドライバーに設定
+    driven_by :selenium_chrome_headless
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # FactoryBotを利用
+  config.include FactoryBot::Syntax::Methods
+
+  config.after(:all) do
+    # テスト終了後にアップロードした写真を削除する
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"]) if Rails.env.test?
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -61,4 +85,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # ヘルパーメソッドを追加
+  config.include SystemSupport, type: :system
+  config.include RequestSupport, type: :request
 end

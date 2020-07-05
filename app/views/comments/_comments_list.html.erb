@@ -1,0 +1,8 @@
+<div id="comments">
+    <% @post.comments.order(created_at: "DESC").each do |comment| %>
+    <div id="comment" class="mt-2">
+        <%= fa_icon 'user-circle', class: 'mr-2' %><%= comment.user.name %><br />
+        <div class="p-2"><%= comment.content %></div>
+    </div>
+    <% end %>
+</div>

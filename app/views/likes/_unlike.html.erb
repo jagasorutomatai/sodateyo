@@ -1,0 +1,3 @@
+<%= form_for(current_user.active_likes.find_by(user_id: current_user.id), html: { method: :delete }, remote: true) do |form| %>
+    <button type="submit" id="unlike_btn" class="btn btn-white"><%= fa_icon 'thumbs-up', class: "text-success" %></button>
+<% end %> 

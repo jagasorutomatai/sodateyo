@@ -1,10 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-  end
-
-  def help
-  end
-
-  def about
+    @posts = Post.all.page(params[:page])
   end
 end
