@@ -1,0 +1,27 @@
+<% @calendars.each do |calendar| %>
+    <div class="card calendar_card">
+        <div class="card-body">
+        <div class="card-title">
+            <h5><%= changeDateFormat(calendar.month) %></h5>
+            <% if current_user?(@post.user) %>
+                <%= link_to "登録", edit_calendar_path(calendar), remote: true %>
+                <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+            <% end %>
+        </div>
+        <% if calendar.planted_flag %>
+            <span class="badge badge-pill badge-success">種植え</span>
+        <% end %>
+        <% if calendar.harvested_flag %>
+            <span class="badge badge-pill badge-success">収穫</span>
+        <% end %>
+        <% if calendar.picture.url %>
+            <span class="badge badge-pill badge-info">写真あり</span>
+        <% end %>
+        <% if calendar.temperature %>
+            <span class="badge badge-pill badge-info"><%= "気温:#{calendar.temperature}℃" %></span>
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <p class="card-text"><%= calendar.content %></p>
+        </div>                
+    </div>
+<% end %>

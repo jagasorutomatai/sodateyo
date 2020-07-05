@@ -1,0 +1,4 @@
+<%= form_for(current_user.active_likes.build, remote: true) do |form| %>
+    <%= hidden_field_tag :post_id, @post.id %>
+    <button type="submit" id="like_btn" class="btn btn-white"><%= fa_icon 'thumbs-up', class: "text-muted" %></button>
+<% end %>
