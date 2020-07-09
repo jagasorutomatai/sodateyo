@@ -1,31 +1,41 @@
 <% posts.each do |post| %>
     <div class='d-flex justify-content-center'>
-        <div class="card mb-4 post_card">
-            <div class="card-header">
-                <span class="badge badge-success mr-2"><%= "#{changeDateFormat(post.planted_at)}栽培開始" %></span>
-                <%= link_to post.title, post %>
-                <%= link_to post.user.name, post.user%>
-                栽培地:<%= post.prefecture.name %>
+        <div class="card mb-4 post_card" style="width: 100%;">
+            <div class="card-header py-2">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <%= link_to post.title, post %>
+                    </div>
+                    <div class="v_line_fix"></div>
+                    <div class="col-sm-2">
+                        作: <%= link_to post.user.name, post.user %>                        
+                    </div>
+                    <div class="v_line_fix"></div>
+                    <div class="col-sm-4">
+                        <div class="align-self-center">
+                            <%= fa_icon 'thumbs-up', class: "text-success" %>
+                            <span class="mr-2"><%= "#{post.liked.count} いいね!" %></span>
+                            <%= fa_icon 'comments', class: "text-success" %>
+                            <span><%= "#{post.comments.count} コメント" %></span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
+                <span class="badge badge-success mr-2 text-white"><%= "#{changeDateFormat(post.planted_at)}栽培開始" %></span>
+                <span class="badge badge-success mr-2">
+                    <%= fa_icon 'map', class: "text-white" %>
+                    <%= post.prefecture.name %>
+                </span>
+                <div class="dropdown-divider mb-3"></div>
                 <div class="row">
                     <div class="col-lg-2 col-md-3 col-sm-4">
                         <%= image_tag post.picture.url, :size => '120x80' %>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8">
-                        <p class="card-subtitle mb-2 text-muted">
+                        <p class="text-muted">
                             <%= post.content %>
                         </p>
-                        <div class="d-flex">
-                            <div class="align-self-center" id="likes">
-                                <%= fa_icon 'thumbs-up', class: "text-success" %>
-                                <%= "#{post.liked.count} いいね!" %>
-                            </div>
-                            <div class="align-self-center ml-3" id="likes">
-                                <%= fa_icon 'comments', class: "text-success mr-2" %>
-                                <%= "#{post.comments.count} コメント" %>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
