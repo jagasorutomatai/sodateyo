@@ -46,7 +46,7 @@ RSpec.describe Calendar, type: :system do
             fill_in 'planted_at', with: '2020/07/01'
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
-            first('.calendar_card').click_on '登録'
+            first('.calendar_card').click_on 'カレンダー編集'
             fill_in 'calendar_content', with: 'テスト'
             select '26', from: 'calendar_temperature'
             click_on '登録する'
@@ -71,7 +71,7 @@ RSpec.describe Calendar, type: :system do
             fill_in 'planted_at', with: '2020/07/01'
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
-            first('.calendar_card').click_on '登録'
+            first('.calendar_card').click_on 'カレンダー編集'
             fill_in 'calendar_content', with: 'a'*141
             select '25', from: 'calendar_temperature'
             click_on '登録する'
