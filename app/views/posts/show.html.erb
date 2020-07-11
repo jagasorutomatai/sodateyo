@@ -5,8 +5,11 @@
         <%= link_to @post.user.name, @post.user %>さんの<%= @post.title %>
       </h5>
       <div>
-        <%= fa_icon 'edit', class: "ml-2" %>
-        <%= link_to  '編集' ,edit_post_path(@post) %>
+        <% if current_user?(@post.user) %>
+          <%= link_to edit_post_path(@post), class: "btn btn-primary btn-sm" do %>
+            <%= fa_icon 'edit' %> 編集
+          <% end %>
+        <% end %>
       </div>
     </div>
     <span class="badge badge-success mr-2 text-white"><%= "#{changeDateFormat(@post.planted_at)}栽培開始" %></span>
@@ -33,7 +36,7 @@
             </div>
         </div>
         <div class="px-2">
-          <p class="text-muted"><%= @post.content %></p>
+          <p class="text-muted"><%= simple_format(@post.content) %></p>
         </div>
       </div>
     </div>

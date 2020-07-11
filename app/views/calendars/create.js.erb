@@ -1,5 +1,5 @@
 <% if @status == 'success' %>
-    $("#edit-modal").modal("hide");
+    $("#new-modal").modal("hide");
     location.reload();
 <% elsif @status == 'fail' %>
     var error_messages = `

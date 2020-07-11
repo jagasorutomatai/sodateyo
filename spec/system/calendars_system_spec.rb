@@ -20,14 +20,14 @@ RSpec.describe Calendar, type: :system do
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
         end
-        it 'カレンダーが12月分ある' do
-            expect(page).to have_selector('.calendar_card', count: 12)
+        it 'カレンダーが1月分ある' do
+            expect(page).to have_selector('.calendar_card', count: 1)
         end
         it 'カレンダーの最初の月が栽培開始日である' do
             expect(first('.calendar_card')).to have_content '2020年7月'
         end
         it 'カレンダーの最初の月に種植えと表示される' do
-            expect(first('.calendar_card')).to have_selector '.badge', text: '種植え'
+            expect(first('.calendar_card')).to have_selector '.badge', text: '栽培開始'
         end
     end
 

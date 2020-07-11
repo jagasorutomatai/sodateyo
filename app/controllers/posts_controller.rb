@@ -15,16 +15,9 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      # 1-12月のカレンダーのデータを作成
+      # 1月分のカレンダーのデータを作成する
       planted_at = Date.parse(params[:post][:planted_at])
-      12.times do |count|
-        if count==0
-          @post.calendars.create(month: planted_at, planted_flag: true)
-        else
-          @post.calendars.create(month: planted_at)
-        end
-        planted_at = planted_at.next_month
-      end
+      @post.calendars.create(month: planted_at, planted_flag: true)
       flash[:success] = '記事の登録に成功しました'
       redirect_to @post
     else
@@ -62,7 +55,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :picture, :prefecture_id, :planted_at)
+    params.require(:post).permit(:title, :content, :picture, :prefecture_id, :planted_at, :harvested_flag)
   end
 
   def correct_post_user

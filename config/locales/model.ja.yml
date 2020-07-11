@@ -25,9 +25,12 @@ ja:
           planted_at: 栽培開始日
         calendar:
           id: ID
+          month: カレンダーの月
           content: カレンダーの内容
           temperature: 気温
           picture: 植物の画像
+        comment:
+          content: コメント
   attributes:
     created_at: 作成日
     updated_at: 更新日
