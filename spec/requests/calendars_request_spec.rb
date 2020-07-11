@@ -13,7 +13,7 @@ RSpec.describe "Calendars", type: :request do
           end
           context '有効なリクエストのとき' do
             before do
-              get "/calendars/#{january.id}/edit", xhr: true
+              get "/posts/#{post1.id}/calendars/#{january.id}/edit", xhr: true
             end
             it 'HTTPレスポンスステータスコードが 200 OK となる' do
               expect(response).to have_http_status 200
@@ -23,7 +23,7 @@ RSpec.describe "Calendars", type: :request do
     
         context 'ログインしてないとき' do
           before do
-            get "/calendars/#{january.id}/edit", xhr: true
+            get "/posts/#{post1.id}/calendars/#{january.id}/edit", xhr: true
           end
           it 'ログイン画面にリダイレクトされる' do
             expect(response).to redirect_to(login_url)
@@ -33,7 +33,7 @@ RSpec.describe "Calendars", type: :request do
         context '別のアカウントでログインしているとき' do
           before do
             log_in_as other
-            get "/calendars/#{january.id}/edit", xhr: true
+            get "/posts/#{post1.id}/calendars/#{january.id}/edit", xhr: true
           end
           it 'ログイン画面にリダイレクトされる' do
             expect(response).to redirect_to(root_url)
@@ -49,7 +49,7 @@ RSpec.describe "Calendars", type: :request do
             end
             context '有効なリクエストのとき' do
                 before do
-                    patch "/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
+                    patch "/posts/#{post1.id}/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
                                                                             temperature: january.temperature,
                                                                             picture: january.picture } }
                     january.reload
@@ -62,7 +62,7 @@ RSpec.describe "Calendars", type: :request do
 
         context 'ログインしてないとき' do
             before do
-                patch "/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
+                patch "/posts/#{post1.id}/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
                                                                         temperature: january.temperature,
                                                                         picture: january.picture } }
                 january.reload
@@ -75,7 +75,7 @@ RSpec.describe "Calendars", type: :request do
         context '別のアカウントでログインしているとき' do
             before do
                 log_in_as other
-                patch "/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
+                patch "/posts/#{post1.id}/calendars/#{january.id}", params: { calendar: { content: '変更したカレンダーの内容',
                                                                         temperature: january.temperature,
                                                                         picture: january.picture } }
                 january.reload

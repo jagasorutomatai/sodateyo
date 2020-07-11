@@ -1,12 +1,23 @@
-$("#comment-content > textarea").val('');
-$(".comments_count").html('<%= "#{@post.comments.count}件のコメント" %>')
-var comments = '<% @post.comments.order(created_at: "DESC").each do |comment| %>' +
-    '<div class="dropdown-divider mb-1"></div>' +
-    '<div id="comment">' +
-    '<%= fa_icon "user-circle", class: "mr-2" %>' +
-    '<span class="mr-2"><%= comment.user.name %></span>' +
-    '<span class="text-muted"><%= comment.created_at %></span>' +
-    '<div class="p-3 text-muted"><%= comment.content %></div>' +
-    '</div>' +
-    '<% end %>';
-$("#comments").html(comments);
+<% if @status == 'success' %>
+    $("#comment-content > textarea").val('');
+    $(".comments_count").html('<%= "#{@post.comments.count}件のコメント" %>')
+    var comments = `
+    <% @post.comments.order(created_at: "DESC").each do |comment| %>
+        <div class="dropdown-divider mb-1"></div>
+            <%= fa_icon "user-circle", class: "mr-2" %>
+            <span class="mr-2"><%= comment.user.name %></span>
+            <span class="text-muted"><%= comment.created_at %></span>
+            <div class="p-3 text-muted"><%= simple_format comment.content %></div>
+        <div id="comment">
+    <% end %>`;
+    $("#comments").html(comments);
+    $('.error_messages').text("");
+<% elsif @status == 'fail' %>
+    var error_messages = `
+    <div>
+        <% @comment.errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger" role="alert"><%= msg %></div>
+        <% end %>
+    </div>`;
+    $('.error_messages').html(error_messages);
+<% end %>
