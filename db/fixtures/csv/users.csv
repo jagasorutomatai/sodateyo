@@ -1,0 +1,7 @@
+id,name,email,password,password_confirmation,admin
+1,芦田要,k-ashida@sodateyo.com,password,password,FALSE
+2,田山護,m-tayama@sodateyo.com,password,password,FALSE
+3,河本博樹,h-kawamoto@sodateyo.com,password,password,FALSE
+4,船橋伸之,n-hunabashi@sodateyo.com,password,password,FALSE
+5,池谷知樹,t-iketani@sodateyo.com,password,password,FALSE
+6,菊谷広之,h-kikuya@sodateyo.com,password,password,FALSE

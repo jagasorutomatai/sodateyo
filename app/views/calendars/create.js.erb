@@ -1,0 +1,12 @@
+<% if @status == 'success' %>
+    $("#new-modal").modal("hide");
+    location.reload();
+<% elsif @status == 'fail' %>
+    var error_messages = `
+    <div>
+        <% @calendar.errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger" role="alert"><%= msg %></div>
+        <% end %>
+    </div>`;
+    $('.error_messages').html(error_messages);
+<% end %>

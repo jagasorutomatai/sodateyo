@@ -1,0 +1,29 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body bg-light p-4">
+        <h5><%= changeDateFormat(@calendar.month) %>カレンダー作成</h5>
+        <div class="dropdown-divider mb-4"></div>
+        <%= form_for(@calendar, url: post_calendars_path, remote: true) do |form| %>
+            <div class="error_messages"></div>
+            <div class="form-group">
+                <%= form.label :content %><span class="text-muted"> (140文字以内)</span>
+                <%= form.text_area :content, rows: "5", class: "form-control" %>
+            </div>
+            <div class="form-group">
+                <%= form.label :temperature %>
+                <%= form.select :temperature, -100..60, { include_blank: true, selected: 0 },{ class: "form-control" } %>
+            </div>
+            <div class="form-group mt-3">
+                <%= form.label :picture %><span class="text-muted"> (画像サイズ上限5MB)</span>
+                <%= form.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "form-control-file" %>
+            </div>
+            <div class="form-group form-check border rounded bg-success text-white text-center p-1">
+                <%= form.check_box :harvested_flag, {}, true, false %>
+                <label for="harvested_flag" class="form-check-label">今月で収穫/栽培終了する</label>
+            </div>
+            <%= form.hidden_field :month, :value => @calendar.month %>
+            <%= form.submit "登録する", class: "btn btn-primary btn-block" %>
+        <% end %>
+    <div>
+  </div>
+</div>

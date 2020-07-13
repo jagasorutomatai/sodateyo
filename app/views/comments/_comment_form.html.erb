@@ -1,6 +1,7 @@
 <%= form_for([@post, current_user.comments.build], remote: true) do |form| %>
+    <div class="error_messages"></div>
     <div id="comment-content">
-    <%= form.text_area :content, class: "form-control", rows: 5 %>
+        <%= form.text_area :content, class: "form-control", rows: 5 %>
     </div>
     <%= form.submit "追加する", class: "btn btn-link" %>
 <% end %>

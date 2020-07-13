@@ -1,27 +1,38 @@
-<% @calendars.each do |calendar| %>
-    <div class="card calendar_card">
-        <div class="card-body">
-        <div class="card-title">
-            <h5><%= changeDateFormat(calendar.month) %></h5>
-            <% if current_user?(@post.user) %>
-                <%= link_to "登録", edit_calendar_path(calendar), remote: true %>
-                <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-            <% end %>
+<div class="row">
+    <% @calendars.each do |calendar| %>
+        <div class="col-sm-4 mb-3">
+            <div class="card calendar_card">
+                <% if calendar.picture.url %>
+                    <%= image_tag calendar.picture.url %>
+                <% end %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= changeDateFormat(calendar.month) %></h5>
+                    <% if calendar.planted_flag %>
+                        <span class="badge badge-success">栽培開始</span>
+                    <% end %>
+                    <% if calendar.harvested_flag %>
+                        <span class="badge badge-success">収穫/栽培終了</span>
+                    <% end %>
+                    <% if calendar.temperature %>
+                        <span class="badge badge-info"><%= "気温:#{calendar.temperature}℃" %></span>
+                    <% end %>
+                    <p class="card-text text-muted mt-2"><%= simple_format calendar.content %></p>
+                    <% if current_user?(@post.user) %>
+                        <%= link_to edit_post_calendar_path(@post,calendar), remote: true, class: "btn btn-primary btn-sm btn-block text-white" do %>
+                            <%= fa_icon 'edit' %> カレンダー編集
+                        <% end %>
+                        <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+                    <% end %>
+                </div>
+            </div>
         </div>
-        <% if calendar.planted_flag %>
-            <span class="badge badge-pill badge-success">種植え</span>
+    <% end %>
+    <div class="col-sm-4 mb-3">
+        <% if current_user?(@post.user) %>
+            <%= link_to new_post_calendar_path(@post), remote: true, class: "btn btn-primary btn-sm btn-block text-white" do %>
+                <%= fa_icon 'plus' %> カレンダー作成
+            <% end %>
+            <div id="new-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
         <% end %>
-        <% if calendar.harvested_flag %>
-            <span class="badge badge-pill badge-success">収穫</span>
-        <% end %>
-        <% if calendar.picture.url %>
-            <span class="badge badge-pill badge-info">写真あり</span>
-        <% end %>
-        <% if calendar.temperature %>
-            <span class="badge badge-pill badge-info"><%= "気温:#{calendar.temperature}℃" %></span>
-        <% end %>
-        <div class="dropdown-divider"></div>
-        <p class="card-text"><%= calendar.content %></p>
-        </div>                
     </div>
-<% end %>
+</div> 

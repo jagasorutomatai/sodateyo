@@ -8,9 +8,10 @@ class CommentsController < ApplicationController
         respond_to do |format|
             if @comment.save
                 format.html { redirect_to @post }
-                format.js
+                format.js { @status = "success"}
             else
                 format.html { redirect_to @post }
+                format.js { @status = "fail"}
             end
         end
     end
