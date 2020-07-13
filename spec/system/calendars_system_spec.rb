@@ -20,14 +20,14 @@ RSpec.describe Calendar, type: :system do
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
         end
-        it 'カレンダーが12月分ある' do
-            expect(page).to have_selector('.calendar_card', count: 12)
+        it 'カレンダーが1月分ある' do
+            expect(page).to have_selector('.calendar_card', count: 1)
         end
         it 'カレンダーの最初の月が栽培開始日である' do
             expect(first('.calendar_card')).to have_content '2020年7月'
         end
         it 'カレンダーの最初の月に種植えと表示される' do
-            expect(first('.calendar_card')).to have_selector '.badge', text: '種植え'
+            expect(first('.calendar_card')).to have_selector '.badge', text: '栽培開始'
         end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Calendar, type: :system do
             fill_in 'planted_at', with: '2020/07/01'
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
-            first('.calendar_card').click_on '登録'
+            first('.calendar_card').click_on 'カレンダー編集'
             fill_in 'calendar_content', with: 'テスト'
             select '26', from: 'calendar_temperature'
             click_on '登録する'
@@ -71,7 +71,7 @@ RSpec.describe Calendar, type: :system do
             fill_in 'planted_at', with: '2020/07/01'
             attach_file 'post_picture', 'spec/fixtures/image.png'
             click_on '追加する'
-            first('.calendar_card').click_on '登録'
+            first('.calendar_card').click_on 'カレンダー編集'
             fill_in 'calendar_content', with: 'a'*141
             select '25', from: 'calendar_temperature'
             click_on '登録する'
