@@ -123,6 +123,13 @@ workflows:
           filters:
             branches:
               only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'sodateyo-task-definition'
+          cluster-name: AWS_ECS_ARN
+          service-name: 'sodateyo'
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
   
   # Railsのデプロイ
   rails-deploy:
@@ -139,3 +146,10 @@ workflows:
           filters:
             branches:
               only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'sodateyo-task-definition'
+          cluster-name: AWS_ECS_ARN
+          service-name: 'sodateyo'
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
