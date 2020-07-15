@@ -14,7 +14,8 @@ CarrierWave.configure do |config|
             region: 'ap-northeast-1'
         }
         config.fog_directory  = 'sodateyo-storage'
-        config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/sodateyo-storage'
+        config.asset_host = 'https://sodateyo-storage.s3-ap-northeast-1.amazonaws.com'
+        config.fog_public = false
     else
         config.storage :file
     end
