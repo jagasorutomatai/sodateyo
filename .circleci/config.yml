@@ -104,9 +104,15 @@ workflows:
       - bundle_dependencies:
           requires:
             - checkout_code
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - bundle_dependencies
+          filters:
+            branches:
+              only: master
 
   # Nginxのデプロイ
   nginx-deploy:
