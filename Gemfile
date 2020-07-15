@@ -22,6 +22,7 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog-aws'
 gem 'ransack'
 
 # moment.js
