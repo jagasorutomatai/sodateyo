@@ -100,13 +100,22 @@ workflows:
   version: 2
   build:
     jobs:
-      - checkout_code
+      - checkout_code:
+          filters:
+            branches:
+              only: master
       - bundle_dependencies:
           requires:
             - checkout_code
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - bundle_dependencies
+          filters:
+            branches:
+              only: master
 
   # Nginxのデプロイ
   nginx-deploy:
@@ -127,7 +136,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: 'sodateyo-task-definition'
-          cluster-name: AWS_ECS_ARN
+          cluster-name: 'sodateyo-cluster'
           service-name: 'sodateyo'
           container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
   
@@ -150,6 +159,6 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: 'sodateyo-task-definition'
-          cluster-name: AWS_ECS_ARN
+          cluster-name: 'sodateyo-cluster'
           service-name: 'sodateyo'
           container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
