@@ -30,7 +30,7 @@
 - Bootstrap, jQuery
 
 ## AWS構成図
-
+![sodateyo-preview](app/assets/images/sodateyo-aws.png)
 
 ## 機能一覧
 - ユーザー機能
