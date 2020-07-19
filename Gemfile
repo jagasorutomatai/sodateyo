@@ -24,6 +24,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
 gem 'ransack'
+gem "administrate"
 
 # moment.js
 gem 'momentjs-rails'

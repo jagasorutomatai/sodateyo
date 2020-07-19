@@ -139,7 +139,7 @@ RSpec.describe Post, type: :system do
         fill_in 'session_email', with: 'testuser@sample.com'
         fill_in 'session_password', with: 'password'
         click_on 'ログインする'
-        click_on '投稿を検索'
+        click_on '記事を検索'
       end
       it '1ページ分の記事数を表示される' do
         expect(page).to have_selector('.post_card', count: 5)
@@ -156,7 +156,7 @@ RSpec.describe Post, type: :system do
         fill_in 'session_email', with: 'testuser@sample.com'
         fill_in 'session_password', with: 'password'
         click_on 'ログインする'
-        click_on '投稿を検索'
+        click_on '記事を検索'
       end
       it '1ページ分の記事数を表示される' do
         expect(page).to have_selector('.post_card', count: 5)
@@ -175,7 +175,7 @@ RSpec.describe Post, type: :system do
           fill_in 'session_email', with: 'testuser@sample.com'
           fill_in 'session_password', with: 'password'
           click_on 'ログインする'
-          click_on '投稿を検索'
+          click_on '記事を検索'
           fill_in 'q_title_or_content_or_user_name_cont', with: posts_kanagawa[1]['title']
           click_on '検索'
         end
@@ -193,7 +193,7 @@ RSpec.describe Post, type: :system do
           fill_in 'session_email', with: 'testuser@sample.com'
           fill_in 'session_password', with: 'password'
           click_on 'ログインする'
-          click_on '投稿を検索'
+          click_on '記事を検索'
           fill_in 'q_title_or_content_or_user_name_cont', with: posts_kanagawa[1]['content']
           click_on '検索'
         end
@@ -211,7 +211,7 @@ RSpec.describe Post, type: :system do
           fill_in 'session_email', with: 'testuser@sample.com'
           fill_in 'session_password', with: 'password'
           click_on 'ログインする'
-          click_on '投稿を検索'
+          click_on '記事を検索'
           select kanagawa['name'], from: 'q_prefecture_name_cont'
           click_on '検索'
         end
@@ -229,7 +229,7 @@ RSpec.describe Post, type: :system do
           fill_in 'session_email', with: 'testuser@sample.com'
           fill_in 'session_password', with: 'password'
           click_on 'ログインする'
-          click_on '投稿を検索'
+          click_on '記事を検索'
           fill_in 'q_title_or_content_or_user_name_cont', with: posts_kanagawa[1]['title']
           select kanagawa['name'], from: 'q_prefecture_name_cont'
           click_on '検索'
