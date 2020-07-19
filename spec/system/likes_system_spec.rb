@@ -13,7 +13,7 @@ RSpec.describe Like, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on post1['title']
             click_on 'like_btn'
         end
@@ -31,7 +31,7 @@ RSpec.describe Like, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on post1['title']
             click_on 'like_btn'
             click_on 'unlike_btn'

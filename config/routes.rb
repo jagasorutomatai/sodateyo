@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :calendars
+      resources :comments
+      resources :likes
+      resources :posts
+      resources :prefectures
+      resources :users
+      resources :relationships
+
+      root to: "calendars#index"
+  end
   get 'posts/index'
   get 'posts/new'
   get 'posts/show'

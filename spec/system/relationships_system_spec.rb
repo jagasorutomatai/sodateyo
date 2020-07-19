@@ -13,7 +13,7 @@ RSpec.describe Relationship, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on other['name']
             click_on 'フォロー'
         end
@@ -33,7 +33,7 @@ RSpec.describe Relationship, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on other['name']
             click_on 'フォロー'
             click_on 'フォローを外す'
@@ -54,7 +54,7 @@ RSpec.describe Relationship, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on other['name']
             click_on 'フォロー'
             click_on 'フォローを外す'

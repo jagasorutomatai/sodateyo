@@ -12,12 +12,17 @@
                     <%= link_to 'ホーム', root_path, class: "nav-link"  %>
                 </li>
                 <% if logged_in? %>
+                    <% if current_user.admin %>
+                        <li class="nav-item" style="font-size: 16px;">
+                            <%= link_to '管理者ダッシュボード', admin_root_path, class: "nav-link" %>
+                        </li>
+                    <% end %>
                     <li class="nav-item" style="font-size: 16px;">
                         <%= link_to 'マイページ', current_user, class: "nav-link"  %>
                     </li>
                 <% end %>
                 <li class="nav-item" style="font-size: 16px;">
-                    <%= link_to '投稿を検索', posts_path, class: "nav-link" %>
+                    <%= link_to '記事を検索', posts_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item" style="font-size: 16px;">
                     <%= link_to 'ランキング', ranks_path, class: "nav-link" %>
@@ -27,19 +32,17 @@
         <div class="collapse navbar-collapse justify-content-end " id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <% if logged_in? %>
-                    <div class="v_line_fix"></div>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%= fa_icon 'user-circle' %> <%= current_user.name %>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <%= link_to "マイページ", current_user, class: "dropdown-item" %>
-                                <%= link_to "設定", edit_user_path(current_user), class: "dropdown-item" %>
-                                <div class="dropdown-divider"></div>
-                                <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
-                            </div>
-                        </li>
-                    <div class="v_line_fix"></div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= fa_icon 'user-circle' %> <%= current_user.name %>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <%= link_to "マイページ", current_user, class: "dropdown-item" %>
+                            <%= link_to "設定", edit_user_path(current_user), class: "dropdown-item" %>
+                            <div class="dropdown-divider"></div>
+                            <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
+                        </div>
+                    </li>
                 <% else %>
                     <li class="nav-item" style="font-size: 16px;">
                         <%= link_to 'ログイン', login_path, class: "nav-link" %>
