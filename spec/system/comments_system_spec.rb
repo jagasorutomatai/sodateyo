@@ -13,7 +13,7 @@ RSpec.describe Comment, type: :system do
             fill_in 'session_password', with: 'password'
             check 'ログイン情報を記憶する'
             click_on 'ログインする'
-            click_on '投稿を検索'
+            click_on '記事を検索'
             click_on post1['title']
             fill_in 'comment_content', with: 'コメントのテストです'
             click_on '追加する'

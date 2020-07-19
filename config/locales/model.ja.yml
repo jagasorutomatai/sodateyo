@@ -1,9 +1,13 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
-      plant: 植物
-      post: 投稿
+      user: ユーザー関連
+      post: 投稿関連
+      calendar: カレンダー関連
+      comment: コメント関連
+      like: いいね関連
+      prefecture: 都道府県関連
+      relationship: フォロー関連
     attributes:
         user:
           id: ID
@@ -34,3 +38,55 @@ ja:
   attributes:
     created_at: 作成日
     updated_at: 更新日
+  helpers:
+    label:
+      user:
+        name: 名前
+        email: メールアドレス
+        posts: 投稿
+        following: フォロー
+        followers: フォローワー
+        comments: コメント
+        liking: いいね
+        created_at: 更新日
+        updated_at: 更新日
+      calendar:
+        post: 投稿
+        month: 月
+        content: カレンダーの内容
+        temperature: 気温
+        picture: 画像
+        planted_flag: 栽培開始
+        harvested_flag: 収穫/栽培終了
+        created_at: 更新日
+        updated_at: 更新日
+      comment:
+        user: ユーザー
+        post: 記事
+        content: コメントの内容
+        created_at: 更新日
+        updated_at: 更新日
+      like:
+        user: ユーザー
+        post: 記事
+        created_at: 更新日
+        updated_at: 更新日
+      post:
+        user: ユーザー
+        prefecture: 都道府県
+        title: 記事のタイトル
+        content: 記事の内容
+        picture: 画像
+        planted_at: 栽培開始日
+        created_at: 更新日
+        updated_at: 更新日
+      prefecture:
+        posts: 投稿
+        name: 都道府県
+        created_at: 更新日
+        updated_at: 更新日
+      relationship:
+        follower: フォローしている人
+        followed: フォローされている人
+        created_at: 更新日
+        updated_at: 更新日
