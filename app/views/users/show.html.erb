@@ -14,11 +14,13 @@
         </div>
     </div>
     <div class="col-sm-10 mt-3">
-        <%= link_to new_post_path, class: "btn btn-primary btn-lg btn-block mb-3" do %>
-          <%= fa_icon 'plus' %> 記事を投稿する
-        <% end %>
-        <h5 class="mt-5">あなたの植物たち</h5>
+        <h5>あなたの植物たち</h5>
         <div class="dropdown-divider mb-3"></div>
+        <% if current_user?(@user) %>
+            <%= link_to new_post_path, class: "btn btn-primary btn-block mb-3" do %>
+            <%= fa_icon 'plus' %> 記事を作成
+            <% end %>
+        <% end %>
         投稿件数: <strong><%= @posts.total_count %></strong>件
         <div class=" d-flex justify-content-center">
             <%= paginate @posts %>

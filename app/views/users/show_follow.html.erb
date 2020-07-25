@@ -1,0 +1,35 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-sm-10 mt-4">
+    <h4><%= @title %></h4>
+    <div class="dropdown-divider"></div>
+  </div>
+  <div class="col-sm-10 mt-3">
+    <table class="table border table-striped">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ユーザー名</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                    <th scope="row"><%= user.id %></th>
+                    <td><%= link_to user.name, user %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+  </div>
+  <div class="col-sm-10 mt-4">
+    <h4>1週間以内に更新した記事</h4>
+    <div class="dropdown-divider"></div>
+  </div>
+  <div class="col-sm-10 mt-3">
+    <% if @posts %>
+      <%= render 'posts/posts_list', posts: @posts %>
+    <% else %>
+      最近更新した記事はありません
+    <% end %>
+  </div>
+</div>
