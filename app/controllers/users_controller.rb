@@ -47,6 +47,36 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def following
+    @title = "フォロー"
+    @user  = User.find(params[:id])
+    @users = @user.following.page(params[:page]).per(5)
+    @posts = []
+    @users.each do |user|
+      user.posts.each do |post|
+        if post.updated_at >= "2020-07-19 07:29:01"
+          @posts.push(post)
+        end
+      end
+    end
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "フォローワー"
+    @user  = User.find(params[:id])
+    @users = @user.followers.page(params[:page]).per(5)
+    @posts = []
+    @users.each do |user|
+      user.posts.each do |post|
+        if post.updated_at >= "2020-07-19 07:29:01"
+          @posts.push(post)
+        end
+      end
+    end
+    render 'show_follow'
+  end
+
   private
 
   def user_params

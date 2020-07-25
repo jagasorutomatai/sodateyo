@@ -1,12 +1,12 @@
 <div class="row d-flex justify-content-center">
   <div class="col-sm-10 mt-4">
     <h5>いいね! の多い記事</h5>
-    <div class="dropdown-divider"></div>
+    <div class="dropdown-divider mb-4"></div>
     <%= render "posts/posts_list.html", posts: @likes_ranking %>
   </div>
   <div class="col-sm-10 mt-4">
     <h5>コメント の多い記事</h5>
-    <div class="dropdown-divider"></div>
+    <div class="dropdown-divider mb-4"></div>
     <%= render "posts/posts_list.html", posts: @comments_ranking %>
   </div>
 </div>

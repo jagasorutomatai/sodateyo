@@ -2,12 +2,15 @@
   <div class="col-sm-10 mt-4">
     <div class="d-flex justify-content-between">
       <h5>
-        <%= link_to @post.user.name, @post.user %>さんの<%= @post.title %>
+        <%= link_to @post.user.name, @post.user %> / <%= @post.title %>
       </h5>
       <div>
         <% if current_user?(@post.user) %>
           <%= link_to edit_post_path(@post), class: "btn btn-primary btn-sm" do %>
             <%= fa_icon 'edit' %> 編集
+          <% end %>
+          <%= link_to post_path(@post), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger btn-sm" do %>
+            <%= fa_icon 'trash' %> 削除
           <% end %>
         <% end %>
       </div>
@@ -42,7 +45,14 @@
     </div>
   </div>
   <div class="col-sm-10 mt-5">
-    <h5>カレンダー</h5>
+    <div class="d-flex justify-content-between">
+      <% if current_user?(@post.user) %>
+        <%= link_to new_post_calendar_path(@post), remote: true, class: "btn btn-primary btn-sm text-white" do %>
+            <%= fa_icon 'plus' %> カレンダー作成
+        <% end %>
+        <div id="new-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+      <% end %>
+      </div>
     <div class="dropdown-divider mb-3"></div>
     <div id="calendars_list"><%= render 'calendars/calendars_list' %></div>
   </div>
