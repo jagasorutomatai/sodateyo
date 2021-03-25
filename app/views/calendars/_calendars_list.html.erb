@@ -27,4 +27,12 @@
             </div>
         </div>
     <% end %>
+    <div class="col-sm-4 mb-3">
+        <% if current_user?(@post.user) %>
+            <%= link_to new_post_calendar_path(@post), remote: true, class: "btn btn-primary btn-sm btn-block text-white" do %>
+                <%= fa_icon 'plus' %> カレンダー作成
+            <% end %>
+            <div id="new-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        <% end %>
+    </div>
 </div> 

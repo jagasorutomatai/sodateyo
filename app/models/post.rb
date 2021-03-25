@@ -12,9 +12,4 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :prefecture_id, presence: { message: 'を選択してください' }
   validates :planted_at, presence: { message: 'を選択してください' }
-
-  # カレンダーを作成/更新した場合に記事のupdated_atを更新する
-  def updateCalendars
-    self.update(updated_at: Time.now)
-  end
 end

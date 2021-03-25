@@ -20,7 +20,5 @@ module Sodateyo
     # the framework and any gems in your application.
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
-
-    config.time_zone = 'Tokyo'
   end
 end
